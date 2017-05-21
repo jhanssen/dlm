@@ -8,12 +8,14 @@ import { HttpDownload} from '../http-download';
   styleUrls: ['./http-downloads.component.css']
 })
 export class HttpDownloadsComponent implements OnInit {
+    downloads : HttpDownload[] = new Array<HttpDownload>();
 
-    constructor(private downloads: HttpDownloadsService) { }
+    constructor(private downloadsService: HttpDownloadsService) { }
 
     ngOnInit() {
-        this.downloads.changes.subscribe(data => {
+        this.downloadsService.changes.subscribe(data => {
             console.log("http!", data);
+            this.downloads = data;
         }, err => {
         });
     }

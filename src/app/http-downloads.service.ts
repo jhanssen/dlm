@@ -17,9 +17,10 @@ export class HttpDownloadsService {
             if (event.type == "message") {
                 if ("type" in event.data && event.data.type == this.typeString) {
                     let dls = new Array<HttpDownload>();
-                    if (event.data instanceof Array) {
-                        for (let idx = 0; idx < event.data.length; ++idx) {
-                            let evt : any = event.data[idx];
+                    //console.log("eh", event.data);
+                    if (event.data.data instanceof Array) {
+                        for (let idx = 0; idx < event.data.data.length; ++idx) {
+                            let evt : any = event.data.data[idx];
                             let headers : Map<string, string>;
                             if ("headers" in evt) {
                                 headers = new Map<string, string>();

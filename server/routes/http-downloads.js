@@ -32,7 +32,8 @@ class HttpDownloads extends EventEmitter
 
     list(ws) {
         // fake some data for now
-        ws.send(JSON.stringify({ type: "http-downloads", data: this._datas }));
+        //ws.send(JSON.stringify({ type: "http-downloads", data: this._datas }));
+        ws.send(JSON.stringify({ type: "http-downloads", data: [{ url: "http://www.google.com/"}] }));
     }
 
     add(ws, data) {
