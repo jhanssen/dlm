@@ -18,6 +18,9 @@ const data = {
         },
         "http-download-add": function(ws, obj) {
             httpDownloads.add(ws, obj);
+        },
+        "http-progress": function(ws, obj) {
+            httpDownloads.progress(ws, obj);
         }
     }
 };
@@ -41,6 +44,8 @@ router.ws('/ws', (ws, req) => {
             let obj = JSON.parse(msg);
             if ("type" in obj && obj.type in data.handlers) {
                 data.handlers[obj.type](ws, obj);
+            } else {
+                console.error(`no handler for ${obj.type}`);
             }
         } catch (e) {
             console.error("invalid client message", msg);

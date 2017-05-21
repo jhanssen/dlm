@@ -38,7 +38,7 @@ export class DclWrapperComponent {
         }
         let factory = this.componentFactoryResolver.resolveComponentFactory(this.type);
         this.cmpRef = this.target.createComponent(factory)
-        this.cmpRef.instance.download = this.arg;
+        this.cmpRef.instance.update(this.arg);
         // to access the created instance use
         // this.compRef.instance.someProperty = 'someValue';
         // this.compRef.instance.someOutput.subscribe(val => doSomething());

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { SocketService } from './socket.service';
 import { HttpDownloadsService } from './http-downloads.service';
+import { HttpProgressService } from './http-progress.service';
 import { TorrentDownloadsService } from './torrent-downloads.service';
 
 import { HttpDownloadComponent } from './http-download/http-download.component';
@@ -30,6 +31,7 @@ import { DclWrapperComponent } from './dcl-wrapper/dcl-wrapper.component';
     providers: [
         SocketService,
         HttpDownloadsService,
+        HttpProgressService,
         TorrentDownloadsService
     ],
     entryComponents: [

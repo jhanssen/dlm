@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { SocketService } from "./socket.service";
 import { HttpDownload, HttpDownloadStatus } from './http-download';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class HttpDownloadsService {
-    subject = new BehaviorSubject<HttpDownload[]>(null);
+    subject = new ReplaySubject<HttpDownload[]>(1);
     typeString = "http-downloads";
 
     public changes = this.subject.asObservable();

@@ -39,6 +39,12 @@ class HttpDownloads extends EventEmitter
     add(ws, data) {
     }
 
+    progress(ws, data) {
+        //console.log("asked for progress for", data);
+        // fake some more
+        ws.send(JSON.stringify({ type: "http-progress", data: { url: "http://www.google.com/", current: 100, length: 1000 }}));
+    }
+
     _recreate() {
     }
 }
