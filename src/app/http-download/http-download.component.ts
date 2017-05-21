@@ -7,7 +7,7 @@ import { HttpDownload} from '../http-download';
   styleUrls: ['./http-download.component.css']
 })
 export class HttpDownloadComponent implements OnInit {
-    public download : HttpDownload;
+    public download : HttpDownload = new HttpDownload();
 
     constructor() { }
 
