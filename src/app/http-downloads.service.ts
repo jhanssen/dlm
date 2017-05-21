@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from "./socket.service";
-import { HttpDownload} from './http-download';
+import { HttpDownload, HttpDownloadStatus } from './http-download';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -22,13 +22,28 @@ export class HttpDownloadsService {
                         for (let idx = 0; idx < event.data.data.length; ++idx) {
                             let evt : any = event.data.data[idx];
                             let headers : Map<string, string>;
+                            let status : HttpDownloadStatus;
+                            switch (evt.status) {
+                            case "paused":
+                                status = HttpDownloadStatus.Paused;
+                                break;
+                            case "downloading":
+                                status = HttpDownloadStatus.Downloading;
+                                break;
+                            case "finished":
+                                status = HttpDownloadStatus.Finished;
+                                break;
+                            case "error":
+                                status = HttpDownloadStatus.Error;
+                                break;
+                            }
                             if ("headers" in evt) {
                                 headers = new Map<string, string>();
                                 for (let k in evt.headers) {
                                     headers[k] = evt.headers[k];
                                 }
                             }
-                            let dl = new HttpDownload(evt.url, evt.username, evt.password, headers);
+                            let dl = new HttpDownload(evt.url, status, evt.username, evt.password, headers);
                             dls.push(dl);
                         }
                     }
