@@ -8,4 +8,8 @@ router.get('/', (req, res) => {
     res.send('api works');
 });
 
+router.ws('/ws', (ws, req) => {
+    ws.send(JSON.stringify({ "yay": "yay" }));
+});
+
 module.exports = router;
