@@ -24,6 +24,8 @@
     "core-js": "^2.4.1",
     "express": "^4.15.3",
     "express-ws": "^3.0.0",
+    "jfs": "^0.2.6",
+    "node-cleanup": "^2.1.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

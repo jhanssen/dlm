@@ -1,17 +1,29 @@
-/*global require,module*/
+/*global require,module,process*/
 
 const express = require('express');
+const httpDownloads = require('./http-downloads');
+const nodeCleanup = require('node-cleanup');
 const router = express.Router();
+
+nodeCleanup(function() {
+    httpDownloads.deinit();
+});
 
 const data = {
     clients: [],
     handlers: {
         "http-downloads": function(ws, obj) {
-            // fake some data for now
-            ws.send(JSON.stringify({ type: "http-downloads", data: "yay" }));
+            httpDownloads.handle(ws);
         }
     }
 };
+
+httpDownloads.init().then(() => {
+    for (let idx in data.clients) {
+        let client = data.clients[idx];
+        httpDownloads.handle(client);
+    }
+});
 
 /* GET api listing. */
 router.get('/', (req, res) => {
