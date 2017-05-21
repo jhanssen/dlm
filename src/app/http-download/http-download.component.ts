@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpDownload} from '../http-download';
 
 @Component({
   selector: 'app-http-download',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./http-download.component.css']
 })
 export class HttpDownloadComponent implements OnInit {
+    public download : HttpDownload;
 
     constructor() { }
 

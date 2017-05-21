@@ -12,13 +12,15 @@ import { TorrentDownloadsService } from './torrent-downloads.service';
 import { HttpDownloadComponent } from './http-download/http-download.component';
 import { TorrentDownloadComponent } from './torrent-download/torrent-download.component';
 import { HttpDownloadsComponent } from './http-downloads/http-downloads.component';
+import { DclWrapperComponent } from './dcl-wrapper/dcl-wrapper.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HttpDownloadComponent,
         TorrentDownloadComponent,
-        HttpDownloadsComponent
+        HttpDownloadsComponent,
+        DclWrapperComponent
     ],
     imports: [
         BrowserModule,
@@ -29,6 +31,10 @@ import { HttpDownloadsComponent } from './http-downloads/http-downloads.componen
         SocketService,
         HttpDownloadsService,
         TorrentDownloadsService
+    ],
+    entryComponents: [
+        HttpDownloadComponent,
+        TorrentDownloadComponent
     ],
     bootstrap: [AppComponent]
 })

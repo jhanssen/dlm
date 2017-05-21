@@ -1,3 +1,4 @@
-<p>
-  <app-http-download *ngFor="let download of downloads"></app-http-download>
-</p>
+<div *ngFor="let download of downloads">
+  <dcl-wrapper [type]="download._component" [arg]="download"></dcl-wrapper>
+</div>
+
