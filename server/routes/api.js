@@ -1,9 +1,10 @@
 /*global require,module,process*/
 
 const express = require('express');
-const httpDownloads = require('./http-downloads');
 const nodeCleanup = require('node-cleanup');
 const router = express.Router();
+const HttpDownloads = require('./http-downloads');
+const httpDownloads = new HttpDownloads;
 
 nodeCleanup(function() {
     httpDownloads.deinit();
@@ -13,7 +14,10 @@ const data = {
     clients: [],
     handlers: {
         "http-downloads": function(ws, obj) {
-            httpDownloads.handle(ws);
+            httpDownloads.list(ws);
+        },
+        "http-download-add": function(ws, obj) {
+            httpDownloads.add(ws, obj);
         }
     }
 };
@@ -21,7 +25,7 @@ const data = {
 httpDownloads.init().then(() => {
     for (let idx in data.clients) {
         let client = data.clients[idx];
-        httpDownloads.handle(client);
+        httpDownloads.list(client);
     }
 });
 

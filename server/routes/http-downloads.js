@@ -1,11 +1,17 @@
 /*global require,module*/
 const Store = require("jfs");
-const db = new Store("dlm");
+const db = new Store("dlmstore");
+const EventEmitter = require("events");
 
-module.exports = {
-    _datas: undefined,
+class HttpDownloads extends EventEmitter
+{
+    constructor() {
+        super();
 
-    init: function() {
+        this._datas = {};
+    }
+
+    init() {
         return new Promise((resolve, reject) => {
             db.get("http", (err, obj) => {
                 if (err) {
@@ -14,16 +20,26 @@ module.exports = {
                     return;
                 }
                 this._datas = obj;
+                this._recreate();
                 resolve();
             });
         });
-    },
-    deinit: function() {
-        db.saveSync("http", this._datas);
-    },
+    }
 
-    handle: function(ws) {
+    deinit() {
+        db.saveSync("http", this._datas);
+    }
+
+    list(ws) {
         // fake some data for now
         ws.send(JSON.stringify({ type: "http-downloads", data: this._datas }));
     }
-};
+
+    add(ws, data) {
+    }
+
+    _recreate() {
+    }
+}
+
+module.exports = HttpDownloads;
