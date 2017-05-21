@@ -8,14 +8,14 @@ class HttpDownloads extends EventEmitter
     constructor() {
         super();
 
-        this._datas = {};
+        this._datas = [];
     }
 
     init() {
         return new Promise((resolve, reject) => {
             db.get("http", (err, obj) => {
                 if (err) {
-                    this._datas = {};
+                    this._datas = [];
                     resolve();
                     return;
                 }

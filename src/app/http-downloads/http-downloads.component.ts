@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpDownloadsService } from "../http-downloads.service";
+import { HttpDownloadsService } from '../http-downloads.service';
+import { HttpDownload} from '../http-download';
 
 @Component({
   selector: 'app-http-downloads',
