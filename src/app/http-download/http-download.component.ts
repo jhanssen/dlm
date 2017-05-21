@@ -10,21 +10,31 @@ import { HttpProgressService } from "../http-progress.service";
 })
 export class HttpDownloadComponent implements OnInit {
     public download : HttpDownload = new HttpDownload();
+    public progress : HttpProgress = new HttpProgress();
+    public progressPercentage : number = undefined;
 
-    constructor(private progress: HttpProgressService) {
+    constructor(private progressService: HttpProgressService) {
     }
 
     ngOnInit() {
-        this.progress.changes.subscribe(data => {
+        this.progressService.changes.subscribe(data => {
             if (this.download && data.url == this.download.url) {
                 // update progress
                 console.log("update progress");
+                this.progress.current = data.current;
+                this.progress.length = data.length;
+                this.progressPercentage = Math.round(this.progress.current / this.progress.length * 100);
             }
         });
     }
 
     update(dl : HttpDownload) {
         this.download = dl;
-        this.progress.request(dl.url);
+        this.progressService.request(dl.url);
+    }
+
+    percentageStyle() : any {
+        let perc = this.progressPercentage || 0;
+        return { width: `${perc}%` };
     }
 }

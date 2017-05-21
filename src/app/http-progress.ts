@@ -1,4 +1,6 @@
 export class HttpProgress {
-    constructor(public url : string, public current : number, public length : number) {
+    constructor(public url : string = undefined,
+                public current : number = undefined,
+                public length : number = undefined) {
     }
 }
