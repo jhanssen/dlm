@@ -11,12 +11,14 @@ import { TorrentDownloadsService } from './torrent-downloads.service';
 
 import { HttpDownloadComponent } from './http-download/http-download.component';
 import { TorrentDownloadComponent } from './torrent-download/torrent-download.component';
+import { HttpDownloadsComponent } from './http-downloads/http-downloads.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HttpDownloadComponent,
-        TorrentDownloadComponent
+        TorrentDownloadComponent,
+        HttpDownloadsComponent
     ],
     imports: [
         BrowserModule,
