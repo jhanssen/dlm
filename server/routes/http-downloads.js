@@ -33,7 +33,7 @@ class HttpDownloads extends EventEmitter
     list(ws) {
         // fake some data for now
         //ws.send(JSON.stringify({ type: "http-downloads", data: this._datas }));
-        ws.send(JSON.stringify({ type: "http-downloads", data: [{ url: "http://www.google.com/"}] }));
+        ws.send(JSON.stringify({ type: "http-downloads", data: [{ url: "http://www.google.com/", status: "downloading"}] }));
     }
 
     add(ws, data) {
@@ -42,7 +42,7 @@ class HttpDownloads extends EventEmitter
     progress(ws, data) {
         //console.log("asked for progress for", data);
         // fake some more
-        ws.send(JSON.stringify({ type: "http-progress", data: { url: "http://www.google.com/", current: 100, length: 1000 }}));
+        ws.send(JSON.stringify({ type: "http-progress", data: { url: "http://www.google.com/", current: 100, length: 1000, status: "downloading" }}));
     }
 
     _recreate() {

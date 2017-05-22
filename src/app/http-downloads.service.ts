@@ -22,21 +22,7 @@ export class HttpDownloadsService {
                         for (let idx = 0; idx < event.data.data.length; ++idx) {
                             let evt : any = event.data.data[idx];
                             let headers : Map<string, string>;
-                            let status : HttpDownloadStatus;
-                            switch (evt.status) {
-                            case "paused":
-                                status = HttpDownloadStatus.Paused;
-                                break;
-                            case "downloading":
-                                status = HttpDownloadStatus.Downloading;
-                                break;
-                            case "finished":
-                                status = HttpDownloadStatus.Finished;
-                                break;
-                            case "error":
-                                status = HttpDownloadStatus.Error;
-                                break;
-                            }
+                            let status = HttpDownload.stringToStatus(evt.status);
                             if ("headers" in evt) {
                                 headers = new Map<string, string>();
                                 for (let k in evt.headers) {

@@ -14,4 +14,18 @@ export class HttpDownload {
                 public password : string = undefined,
                 public headers : Map<string, string> = undefined) {
     }
+
+    static stringToStatus(status : string) : HttpDownloadStatus {
+        switch (status) {
+        case "paused":
+            return HttpDownloadStatus.Paused;
+        case "downloading":
+            return HttpDownloadStatus.Downloading;
+        case "finished":
+            return HttpDownloadStatus.Finished;
+        case "error":
+            return HttpDownloadStatus.Error;
+        }
+        return undefined;
+    }
 }
