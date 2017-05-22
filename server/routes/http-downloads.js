@@ -50,8 +50,11 @@ class HttpDownload extends EventEmitter
     start() {
         if (this.ctrl)
             return;
-        console.log("uhm, go?");
-        mtdl.prepare({ url: this.url, path: ".", threads: 8 })
+        let prep = { url: this.url, path: ".", threads: 8 };
+        if (this.filename)
+            prep.file = this.filename;
+        console.log("uhm, go?", prep);
+        mtdl.prepare(prep)
             .then(ctrl => {
                 this.ctrl = ctrl;
                 this.filename = ctrl.path;
