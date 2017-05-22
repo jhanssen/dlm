@@ -25,7 +25,7 @@
     "express": "^4.15.3",
     "express-ws": "^3.0.0",
     "jfs": "^0.2.6",
-    "mt-download": "0.0.1",
+    "mt-download": "~0.0.3",
     "ng2-bs3-modal": "^0.10.4",
     "node-cleanup": "^2.1.2",
     "rxjs": "^5.1.0",
