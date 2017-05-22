@@ -38,4 +38,14 @@ export class HttpDownloadsService {
             }
         });
     }
+
+    start(download : HttpDownload) {
+        this.socket.send({ type: "http-download-add", download: download.serialize() });
+    }
+
+    stop(url : string) {
+    }
+
+    remove(url : string) {
+    }
 }
