@@ -40,15 +40,18 @@ class HttpDownload extends EventEmitter
             this.filename = data.filename;
         else
             this.filename = "";
+        if ("state" in data)
+            this.state = data.state;
+        else
+            this.state = undefined;
 
         this.ctrl = undefined;
         this.current = undefined;
         this.length = undefined;
-        this.state = undefined;
     }
 
     start() {
-        if (this.ctrl)
+        if (this.ctrl || this.state == mtdl.State.Finished)
             return;
         let prep = { url: this.url, path: ".", threads: 8 };
         if (this.filename)
