@@ -19,8 +19,8 @@ export class HttpProgressService {
                         let url : string = event.data.data.url;
                         let current : number = event.data.data.current;
                         let length : number = event.data.data.length;
-                        let status : string = event.data.data.status;
-                        let progress = new HttpProgress(url, current, length, status);
+                        let state : string = event.data.data.state;
+                        let progress = new HttpProgress(url, current, length, state);
                         this.subject.next(progress);
                     }
                 }

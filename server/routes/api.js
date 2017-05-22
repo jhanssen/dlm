@@ -22,6 +22,13 @@ const data = {
         "http-progress": function(ws, obj) {
             httpDownloads.progress(ws, obj);
         }
+    },
+
+    sendToAll: function(out) {
+        for (let idx = 0; idx < data.clients.length; ++idx) {
+            let client = data.clients[idx];
+            client.send(out);
+        }
     }
 };
 
@@ -30,6 +37,11 @@ httpDownloads.init().then(() => {
         let client = data.clients[idx];
         httpDownloads.list(client);
     }
+});
+
+httpDownloads.on("data", out => {
+    console.log("ah", out);
+    data.sendToAll(out);
 });
 
 /* GET api listing. */

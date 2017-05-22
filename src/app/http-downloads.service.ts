@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from "./socket.service";
-import { HttpDownload, HttpDownloadStatus } from './http-download';
+import { HttpDownload, HttpDownloadState } from './http-download';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
@@ -22,14 +22,14 @@ export class HttpDownloadsService {
                         for (let idx = 0; idx < event.data.data.length; ++idx) {
                             let evt : any = event.data.data[idx];
                             let headers : Map<string, string>;
-                            let status = HttpDownload.stringToStatus(evt.status);
+                            let state = HttpDownload.stringToState(evt.state);
                             if ("headers" in evt) {
                                 headers = new Map<string, string>();
                                 for (let k in evt.headers) {
                                     headers[k] = evt.headers[k];
                                 }
                             }
-                            let dl = new HttpDownload(evt.url, status, evt.username, evt.password, headers);
+                            let dl = new HttpDownload(evt.url, state, evt.username, evt.password, headers);
                             dls.push(dl);
                         }
                     }

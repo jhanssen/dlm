@@ -36,7 +36,10 @@ export class HttpDownloadsComponent implements OnInit {
     }
 
     addClose() {
-        console.log("add", this.data.url);
+        //console.log("add", this.data.url);
+        // make a HttpDownload
+        let dl = new HttpDownload(this.data.url);
+        this.downloadsService.start(dl);
         this.data.url = "";
     }
 }

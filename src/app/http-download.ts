@@ -1,4 +1,4 @@
-export enum HttpDownloadStatus {
+export enum HttpDownloadState {
     Paused = 1,
     Downloading,
     Finished,
@@ -9,7 +9,7 @@ export class HttpDownload {
     public _component : string;
 
     constructor(public url : string = undefined,
-                public status : HttpDownloadStatus = undefined,
+                public state : HttpDownloadState = undefined,
                 public username : string = undefined,
                 public password : string = undefined,
                 public headers : Map<string, string> = undefined) {
@@ -24,29 +24,29 @@ export class HttpDownload {
         };
     }
 
-    static stringToStatus(status : string) : HttpDownloadStatus {
-        switch (status) {
+    static stringToState(state : string) : HttpDownloadState {
+        switch (state) {
         case "paused":
-            return HttpDownloadStatus.Paused;
+            return HttpDownloadState.Paused;
         case "downloading":
-            return HttpDownloadStatus.Downloading;
+            return HttpDownloadState.Downloading;
         case "finished":
-            return HttpDownloadStatus.Finished;
+            return HttpDownloadState.Finished;
         case "error":
-            return HttpDownloadStatus.Error;
+            return HttpDownloadState.Error;
         }
         return undefined;
     }
 
-    static statusToString(status : HttpDownloadStatus) : string {
-        switch (status) {
-        case HttpDownloadStatus.Paused:
+    static stateToString(state : HttpDownloadState) : string {
+        switch (state) {
+        case HttpDownloadState.Paused:
             return "paused";
-        case HttpDownloadStatus.Downloading:
+        case HttpDownloadState.Downloading:
             return "downloading";
-        case HttpDownloadStatus.Finished:
+        case HttpDownloadState.Finished:
             return "finished";
-        case HttpDownloadStatus.Error:
+        case HttpDownloadState.Error:
             return "error";
         }
         return undefined;

@@ -24,9 +24,10 @@ export class HttpDownloadComponent implements OnInit {
                 this.progress.current = data.current;
                 this.progress.length = data.length;
                 this.progressPercentage = Math.round(this.progress.current / this.progress.length * 100);
-                let status = HttpDownload.stringToStatus(data.status);
-                if (status != undefined)
-                    this.download.status = status;
+                console.log(`ugh ${this.progressPercentage} from ${this.progress.current} + ${this.progress.length}`);
+                let state = HttpDownload.stringToState(data.state);
+                if (state != undefined)
+                    this.download.state = state;
             }
         });
     }
