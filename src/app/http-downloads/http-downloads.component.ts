@@ -12,6 +12,10 @@ import { HttpDownload} from '../http-download';
 export class HttpDownloadsComponent implements OnInit {
     downloads : HttpDownload[] = new Array<HttpDownload>();
 
+    public data : {
+        url : string
+    } = { url: undefined };
+
     constructor(private downloadsService: HttpDownloadsService) { }
 
     ngOnInit() {
@@ -27,7 +31,12 @@ export class HttpDownloadsComponent implements OnInit {
         });
     }
 
-    add() {
-        console.log("add");
+    addDismiss() {
+        this.data.url = "";
+    }
+
+    addClose() {
+        console.log("add", this.data.url);
+        this.data.url = "";
     }
 }

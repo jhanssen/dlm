@@ -1,19 +1,25 @@
 <div class="panel panel-default">
   <div class="panel-heading">HTTP Downloads</div>
   <div class="panel-body">
-    <button type="button" class="btn btn-primary" (click)="modal.open()">Add</button>
+    <button type="button" class="btn btn-primary" (click)="addModal.open()">Add</button>
     <div *ngFor="let download of downloads">
       <dcl-wrapper [type]="download._component" [arg]="download"></dcl-wrapper>
     </div>
   </div>
 </div>
 
-<modal #modal>
+<modal #addModal (onDismiss)="addDismiss()" (onClose)="addClose()">
     <modal-header [show-close]="true">
 	<h4 class="modal-title">I'm a modal!</h4>
     </modal-header>
     <modal-body>
-	Hello World!
+      <div class="form-group">
+	<label for="addUrl">URL</label>
+	<input type="text" class="form-control" [(ngModel)]="data.url" id="addUrl">
+      </div>
     </modal-body>
-    <modal-footer [show-default-buttons]="true"></modal-footer>
+    <modal-footer>
+	<button type="button" class="btn btn-default" data-dismiss="modal" (click)="addModal.dismiss()">Cancel</button>
+	<button type="button" class="btn btn-primary" (click)="addModal.close()">Ok</button>
+    </modal-footer>
 </modal>
