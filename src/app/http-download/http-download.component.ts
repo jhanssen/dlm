@@ -20,14 +20,17 @@ export class HttpDownloadComponent implements OnInit {
         this.progressService.changes.subscribe(data => {
             if (this.download && data.url == this.download.url) {
                 // update progress
-                console.log("update progress");
-                this.progress.current = data.current;
-                this.progress.length = data.length;
-                this.progressPercentage = Math.round(this.progress.current / this.progress.length * 100);
-                console.log(`ugh ${this.progressPercentage} from ${this.progress.current} + ${this.progress.length}`);
-                let state = HttpDownload.stringToState(data.state);
-                if (state != undefined)
-                    this.download.state = state;
+                // console.log("update progress");
+                let perc = Math.round(data.current / data.length * 100);
+                if (this.progressPercentage != perc) {
+                    this.progress.current = data.current;
+                    this.progress.length = data.length;
+                    this.progressPercentage = perc;
+                    console.log(`ugh ${this.progressPercentage} from ${this.progress.current} + ${this.progress.length}`);
+                    let state = HttpDownload.stringToState(data.state);
+                    if (state != undefined)
+                        this.download.state = state;
+                }
             }
         });
     }
@@ -38,6 +41,7 @@ export class HttpDownloadComponent implements OnInit {
     }
 
     percentageStyle() : any {
+        // console.log("hey, percentageStyle called");
         let perc = this.progressPercentage || 0;
         return { width: `${perc}%` };
     }
