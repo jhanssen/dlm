@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpDownload } from '../http-download';
+import { HttpDownload, HttpDownloadState } from '../http-download';
 import { HttpProgress } from '../http-progress';
 import { HttpProgressService } from "../http-progress.service";
 
@@ -12,6 +12,7 @@ export class HttpDownloadComponent implements OnInit {
     public download : HttpDownload = new HttpDownload();
     public progress : HttpProgress = new HttpProgress();
     public progressPercentage : number = undefined;
+    public downloadState : HttpDownloadState = undefined;
 
     constructor(private progressService: HttpProgressService) {
     }
@@ -22,14 +23,14 @@ export class HttpDownloadComponent implements OnInit {
                 // update progress
                 // console.log("update progress");
                 let perc = Math.round(data.current / data.length * 100);
-                if (this.progressPercentage != perc) {
+                let state = HttpDownload.stringToState(data.state);
+                if (this.progressPercentage != perc || this.downloadState != state) {
                     this.progress.current = data.current;
                     this.progress.length = data.length;
                     this.progressPercentage = perc;
+                    if (state !== undefined)
+                        this.downloadState = state;
                     console.log(`ugh ${this.progressPercentage} from ${this.progress.current} + ${this.progress.length}`);
-                    let state = HttpDownload.stringToState(data.state);
-                    if (state != undefined)
-                        this.download.state = state;
                 }
             }
         });
