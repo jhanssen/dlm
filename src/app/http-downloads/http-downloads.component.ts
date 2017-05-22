@@ -27,4 +27,7 @@ export class HttpDownloadsComponent implements OnInit {
         });
     }
 
+    add() {
+        console.log("add");
+    }
 }

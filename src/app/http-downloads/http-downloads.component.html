@@ -1,6 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">HTTP Downloads</div>
   <div class="panel-body">
+    <button type="button" class="btn btn-primary" (click)="add()">Add</button>
     <div *ngFor="let download of downloads">
       <dcl-wrapper [type]="download._component" [arg]="download"></dcl-wrapper>
     </div>
