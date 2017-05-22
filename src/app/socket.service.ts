@@ -5,14 +5,14 @@ export class SocketService {
 
     private socket: WebSocket;
     private listener: EventEmitter<any> = new EventEmitter();
-    private pending: string[] = [];
+    private pending: any[] = [];
 
     public constructor() {
         this.socket = new WebSocket(`ws://${window.location.host}/api/ws`);
         this.socket.onopen = event => {
             // write pending
             for (let idx in this.pending) {
-                this.socket.send(this.pending[idx]);
+                this.socket.send(JSON.stringify(this.pending[idx]));
             }
             this.pending = [];
             this.listener.emit({"type": "open", "data": event});
@@ -25,13 +25,13 @@ export class SocketService {
         }
     }
 
-    public send(data: string) {
+    public send(data: any) {
         switch (this.socket.readyState) {
         case WebSocket.CONNECTING:
             this.pending.push(data);
             break;
         case WebSocket.OPEN:
-            this.socket.send(data);
+            this.socket.send(JSON.stringify(data));
             break;
         }
     }

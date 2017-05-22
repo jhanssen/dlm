@@ -12,7 +12,7 @@ export class HttpDownloadsService {
     public changes = this.subject.asObservable();
 
     constructor(private socket: SocketService) {
-        this.socket.send(JSON.stringify({ type: this.typeString }));
+        this.socket.send({ type: this.typeString });
         this.socket.getEventListener().subscribe(event => {
             if (event.type == "message") {
                 if ("type" in event.data && event.data.type == this.typeString) {

@@ -29,6 +29,6 @@ export class HttpProgressService {
     }
 
     request(url : string) {
-        this.socket.send(JSON.stringify({ type: this.typeString, url: url }));
+        this.socket.send({ type: this.typeString, url: url });
     }
 }
